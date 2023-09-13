@@ -40,7 +40,7 @@ public class Repository {
 
         try {
             ResultSet lines = this.getConnection()
-                    .prepareStatement("SELECT username, points FROM records SORT BY points DESC LIMIT 5;")
+                    .prepareStatement("SELECT records.username, records.points FROM records ORDER BY records.points DESC LIMIT 5;")
                     .executeQuery();
 
             while (lines.next()) {

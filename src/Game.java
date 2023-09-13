@@ -22,8 +22,6 @@ public class Game {
         String[] operators = {"+", "-", "*", "/"};
         Scanner scanner = new Scanner(System.in);
 
-        this.repository.createRecord("test", 12);
-
         System.out.println("What's your name?");
         String name = scanner.next();
 
@@ -83,6 +81,8 @@ public class Game {
         this.repository.createRecord(name, rightAnswers);
         this.showUserResult(rightAnswers, totalAnswers);
         this.showBetterRecords();
+
+        this.exit();
     }
 
     private void showBetterRecords() {
@@ -93,7 +93,7 @@ public class Game {
         for (int i = 0; i < betterRecords.size(); i++) {
             Record record = betterRecords.get(i);
 
-            System.out.println(i + " | " + record.getUsername() + " | " + record.getPoints());
+            System.out.println(i + 1 + " | " + record.getUsername() + " -> " + record.getPoints());
         }
     }
 
@@ -101,5 +101,9 @@ public class Game {
         System.out.println("\n\nFinished!!");
         System.out.println("Total questions: " + totalAnswers);
         System.out.println("Total right answers: " + rightAnswers);
+    }
+
+    private void exit() {
+        System.exit(0);
     }
 }
