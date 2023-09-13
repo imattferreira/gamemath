@@ -14,7 +14,6 @@ public class Game {
     }
 
     public void play() {
-
         this.timer = new Timer();
         Random randomNumber = new Random();
         String[] operators = {"+", "-", "*", "/"};
@@ -27,7 +26,6 @@ public class Game {
         int totalAnswers = 0;
 
         while(!over) {
-
             int firstNumber = randomNumber.nextInt(51);
             int secondNumber = randomNumber.nextInt(51);
             int userResult;
@@ -35,7 +33,6 @@ public class Game {
             String operator = operators[randomNumber.nextInt(4)];
 
             try {
-
                 switch (operator) {
                     case "+" -> {
                         System.out.printf("%d + %d %n", firstNumber, secondNumber);
@@ -86,7 +83,6 @@ public class Game {
                     }
 
                     case "/" -> {
-
                         while (secondNumber == 0){
                             secondNumber = randomNumber.nextInt(51);
                         }
@@ -120,7 +116,6 @@ public class Game {
         this.repository.createRecord(name, rightAnswers);
         this.showUserResult(rightAnswers, totalAnswers);
         this.showBetterRecords();
-
     }
 
     private void showBetterRecords() {

@@ -8,8 +8,6 @@ public class Repository {
 
     private Connection getConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection connection = DriverManager.getConnection(this.url, this.username, this.password);
 
             return connection;
@@ -40,7 +38,7 @@ public class Repository {
 
         try {
             ResultSet lines = this.getConnection()
-                    .prepareStatement("SELECT TOP 5 records.username, records.points FROM records ORDER BY records.points DESC ;")
+                    .prepareStatement("SELECT TOP 5 records.username, records.points FROM records ORDER BY records.points DESC;")
                     .executeQuery();
 
             while (lines.next()) {
