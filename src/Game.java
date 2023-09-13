@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Timer;
+import java.util.*;
 
 public class Game {
     private Timer timer;
@@ -13,10 +10,11 @@ public class Game {
         this.timer = new Timer();
         this.repository = new Repository();
 
-        this.timer.schedule(new GameOver(), 10000);
+        this.timer.schedule(new GameOver(), 30000);
     }
 
     public void play() {
+
         this.timer = new Timer();
         Random randomNumber = new Random();
         String[] operators = {"+", "-", "*", "/"};
@@ -29,52 +27,93 @@ public class Game {
         int totalAnswers = 0;
 
         while(!over) {
+
             int firstNumber = randomNumber.nextInt(51);
             int secondNumber = randomNumber.nextInt(51);
+            int userResult;
 
             String operator = operators[randomNumber.nextInt(4)];
 
+            try {
 
-            if(operator == "+") {
-                System.out.println(firstNumber + " + " + secondNumber);
-                int soma = firstNumber + secondNumber;
-                System.out.println("Answer: ");
-                int userResult = scanner.nextInt();
+                switch (operator) {
+                    case "+" -> {
+                        System.out.printf("%d + %d %n", firstNumber, secondNumber);
+                        System.out.print("Answer: ");
 
-                if (soma == userResult) {
-                    rightAnswers ++;
+                        userResult = scanner.nextInt();
+                        int sum = firstNumber + secondNumber;
+
+                        if (userResult == sum) {
+                            rightAnswers++;
+                            System.out.println("Correct");
+                        } else {
+                            System.out.println("Incorrect");
+                        }
+
+                    }
+
+                    case "-" -> {
+                        System.out.printf("%d - %d %n", firstNumber, secondNumber);
+                        System.out.print("Answer: ");
+
+                        userResult = scanner.nextInt();
+
+                        int subtraction = firstNumber - secondNumber;
+
+                        if (userResult == subtraction) {
+                            rightAnswers++;
+                            System.out.println("Correct!");
+                        } else {
+                            System.out.println("Incorrect");
+                        }
+                    }
+
+                    case "*" -> {
+                        System.out.printf("%d X %d %n", firstNumber, secondNumber);
+                        System.out.print("Answer: ");
+
+                        userResult = scanner.nextInt();
+
+                        int multiplication = firstNumber * secondNumber;
+
+                        if (userResult == multiplication) {
+                            rightAnswers++;
+                            System.out.println("Correct!");
+                        } else {
+                            System.out.println("Incorrect");
+                        }
+                    }
+
+                    case "/" -> {
+
+                        while (secondNumber == 0){
+                            secondNumber = randomNumber.nextInt(51);
+                        }
+
+                        System.out.printf("%d / %d %n", firstNumber, secondNumber);
+                        System.out.print("Answer: ");
+
+                        userResult = scanner.nextInt();
+
+                        int division = firstNumber / secondNumber;
+
+                        if (userResult == division) {
+                            rightAnswers++;
+                            System.out.println("Correct!");
+                        } else {
+                            System.out.println("Incorrect");
+                        }
+                    }
+
                 }
 
-            } else if (operator == "-"){
-                System.out.println(firstNumber + " - " + secondNumber);
-                System.out.println("Answer: ");
-                int userResult = scanner.nextInt();
-                int sub = firstNumber - secondNumber;
-
-                if (sub == userResult) {
-                    rightAnswers ++;
-                }
-
-            } else if (operator == "*") {
-                System.out.println(firstNumber + " * " + secondNumber);
-                System.out.println("Answer: ");
-                int userResult = scanner.nextInt();
-                int mult = firstNumber * secondNumber;
-
-                if (mult == userResult) {
-                    rightAnswers ++;
-                }
-
-            } else if (operator == "/") {
-                System.out.println(firstNumber + " / " + secondNumber);
-                System.out.println("Answer: ");
-                int userResult = scanner.nextInt();
-                int div = firstNumber / secondNumber;
-
-                if (div == userResult) {
-                    rightAnswers ++;
-                }
+            } catch (InputMismatchException e) {
+                System.err.println("Integer values only !!");
+                scanner.nextLine();
             }
+
+            totalAnswers ++;
 
         }
 
@@ -82,7 +121,6 @@ public class Game {
         this.showUserResult(rightAnswers, totalAnswers);
         this.showBetterRecords();
 
-        this.exit();
     }
 
     private void showBetterRecords() {

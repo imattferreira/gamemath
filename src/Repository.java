@@ -2,9 +2,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Repository {
-    private final String url = "jdbc:mysql://localhost:3306/gamemath";
-    private final String username = "root";
-    private final String password = "docker";
+    private final String url = "jdbc:sqlserver://localhost:1433;databaseName=game;encrypt=false;";
+    private final String username = "gameUser";
+    private final String password = "123";
 
     private Connection getConnection() {
         try {
@@ -40,7 +40,7 @@ public class Repository {
 
         try {
             ResultSet lines = this.getConnection()
-                    .prepareStatement("SELECT records.username, records.points FROM records ORDER BY records.points DESC LIMIT 5;")
+                    .prepareStatement("SELECT TOP 5 records.username, records.points FROM records ORDER BY records.points DESC ;")
                     .executeQuery();
 
             while (lines.next()) {
