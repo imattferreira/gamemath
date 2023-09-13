@@ -11,7 +11,7 @@ public class Repository {
             Connection connection = DriverManager.getConnection(this.url, this.username, this.password);
 
             return connection;
-        } catch (SQLException | ClassNotFoundException err) {
+        } catch (SQLException err) {
             err.printStackTrace();
         }
 
