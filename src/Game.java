@@ -19,7 +19,10 @@ public class Game {
     public void play() {
         this.timer = new Timer();
         Random randomNumber = new Random();
+        String[] operators = {"+", "-", "*", "/"};
         Scanner scanner = new Scanner(System.in);
+
+        this.repository.createRecord("test", 12);
 
         System.out.println("What's your name?");
         String name = scanner.next();
@@ -31,7 +34,6 @@ public class Game {
             int firstNumber = randomNumber.nextInt(51);
             int secondNumber = randomNumber.nextInt(51);
 
-            String[] operators = {"+", "-", "*", "/"};
             String operator = operators[randomNumber.nextInt(4)];
 
 

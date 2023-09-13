@@ -2,15 +2,18 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Repository {
-    private static Repository _instance;
-    private final String url = "jdbc:mysql://localhost:3306/fiblioteca?serverTimezone=UTC";
-    private final String user = "docker";
+    private final String url = "jdbc:mysql://localhost:3306/gamemath";
+    private final String username = "root";
     private final String password = "docker";
 
     private Connection getConnection() {
         try {
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException err) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(this.url, this.username, this.password);
+
+            return connection;
+        } catch (SQLException | ClassNotFoundException err) {
             err.printStackTrace();
         }
 
@@ -23,8 +26,8 @@ public class Repository {
                     .getConnection()
                     .prepareStatement("INSERT INTO records (username, points) VALUES (?,?);");
 
-            statement.setString(0, username);
-            statement.setInt(1, points);
+            statement.setString(1, username);
+            statement.setInt(2, points);
 
             statement.execute();
         } catch (SQLException err) {
